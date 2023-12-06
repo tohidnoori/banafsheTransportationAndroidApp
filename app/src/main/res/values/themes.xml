@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BanafsheTransportation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#673AB7</item>
+        <item name="colorPrimaryVariant">#CE211A2B</item>
+        <item name="colorOnPrimary">@color/MOVIE_SHADOW_LIGHT</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#673AB7</item>
+        <item name="colorSecondaryVariant">@color/BLUE_DARK</item>
+        <item name="colorOnSecondary">@color/TEXT_GRAY</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>

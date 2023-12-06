@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="background_first">#353A40</color>
+    <color name="background_last">#16171B</color>
+    <color name="background_cards">#FFFFFF</color>
+    <color name="BLUE_LIGHT">#11A8FD</color>
+    <color name="BLUE_DARK">#005EA3</color>
+    <color name="GRAY_TEXT">#221D2C</color>
+    <color name="MOVIE_BACKGROUND">#313439</color>
+    <color name="MOVIE_SHADOW_LIGHT">#424449</color>
+    <color name="MOVIE_SHADOW_DARK">#000</color>
+
+    <color name="OUTER_SPACE">#32383D</color>
+    <color name="SHARK">#E2DCEC</color>
+    <color name="MOVIE_SHADOW_LIGHT2">#383A3E</color>
+    <color name="GOLDENROD">#2C1B4A</color>
+
+    <color name="NEW_BACKGROUND">#1A1A1A</color>
+    <color name="NEW_SHADOW1">#7C6200EE</color>
+    <color name="NEW_SHADOW2">#74BB86FC</color>
+    <color name="TEXT_GRAY">@color/SHARK</color>
+    <color name="TEXT_WHITE">#000000</color>
+
+
+    <color name="background_first_l">#CCCCCC</color>
+    <color name="background_last_l">#FFFFFF</color>
+    <color name="background_cards_l">#A3A3A3</color>
+    <color name="GRAY_TEXT_l">#54575A</color>
+
+
+
+    <color name="ICON_DEFAULT_COLOR">#6B6F74</color>
+</resources>

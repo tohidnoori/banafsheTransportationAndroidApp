@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/etxtNumber"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txtDateResid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransansmobile_fanum_light"
+                android:gravity="start"
+                android:layoutDirection="rtl"
+                android:text="تاریخ"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/GOLDENROD"
+                android:textDirection="rtl" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtResidnum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".085"
+                    android:fontFamily="@font/iransansmobile_fanum_bold"
+                    android:foregroundGravity="right"
+                    android:layoutDirection="rtl"
+                    android:text="شماره فاکتور"
+                    android:textColor="@color/GOLDENROD"
+                    android:textDirection="rtl"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_format_list_numbered_rtl_24"
+                    app:tint="@color/GOLDENROD" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/iransansmobile_fanum_light"
+                android:layoutDirection="rtl"
+                android:text="مبلغ باقی مانده "
+                android:textColor="@color/GRAY_TEXT"
+                android:textDirection="rtl"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtCustumerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:layoutDirection="rtl"
+                android:text="خانم/آقای "
+                android:textColor="@color/GRAY_TEXT"
+                android:textDirection="rtl"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:layoutDirection="rtl"
+                android:text="آدرس "
+                android:textColor="@color/GRAY_TEXT"
+                android:textDirection="rtl"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtCustumerPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:layoutDirection="rtl"
+                android:text="تلفن "
+                android:textColor="@color/GRAY_TEXT"
+                android:textDirection="rtl"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/txtDisplay"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/byekanbold"-->
+<!--            android:text="نمایش کالا ها"-->
+<!--            android:textColor="@color/BLUE_LIGHT" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerShowResid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="1" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/GOLDENROD"
+            android:backgroundTint="@color/GOLDENROD"
+            android:foreground="@color/GOLDENROD"
+            android:foregroundTint="@color/GOLDENROD"
+            android:foregroundTintMode="src_atop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/imgSubmitCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/byekanbold"
+                android:text="تایید"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight=".75"
+                android:textColor="#109C10" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imgSubmitCode"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/ic_baseline_check_24"-->
+<!--                app:tint="#ff0000" />-->
+
+            <EditText
+                android:id="@+id/etxtCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekan"
+                android:gravity="start"
+                android:hint="کد تایید ارسال شده برای مشتری را وارد کنید."
+                android:inputType="number"
+                android:layoutDirection="rtl"
+                android:text=""
+                android:textColor="@color/GRAY_TEXT"
+                android:textColorHint="@color/GRAY_TEXT"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/isNotCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/byekanbold"
+            android:text="کسری بار" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

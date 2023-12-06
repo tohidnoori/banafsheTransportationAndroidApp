@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:layout_marginStart="10dp"
+    android:id="@+id/etxtNumber"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="4dp"
+    android:layoutDirection="ltr"
+    app:layout_anchorGravity="center|top"
+    android:layout_marginTop="8dp"
+    android:foregroundGravity="top|center"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1.2">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_baseline_delete_24"
+                app:tint="@color/GOLDENROD" />
+
+            <TextView
+                android:id="@+id/txtJob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekanbold"
+                android:foregroundGravity="right"
+                android:text="شغل"
+                android:textColor="@color/GOLDENROD"
+                android:textDirection="rtl"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:foregroundGravity="center"
+                app:srcCompat="@drawable/ic_baseline_account_circle_24"
+                app:tint="@color/GOLDENROD" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransansmobile_fanum_bold"
+                android:gravity="start"
+                android:text="شماره تماس"
+                android:textColor="@color/GRAY_TEXT" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekan"
+                android:text="نام کاربر"
+                android:textColor="@color/GRAY_TEXT"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

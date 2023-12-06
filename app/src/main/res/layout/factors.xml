@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/etxtNumber"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="4dp"
+    android:background="#00FFFFFF"
+    android:layoutDirection="ltr"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/iransansmobile_fanum_light"
+                android:gravity="start"
+                android:text="تاریخ"
+                android:textColor="@color/GOLDENROD" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtfactornum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".085"
+                    android:fontFamily="@font/iransansmobile_fanum_bold"
+                    android:foregroundGravity="right"
+                    android:layoutDirection="rtl"
+                    android:text="شماره فاکتور"
+                    android:textColor="@color/GOLDENROD"
+                    android:textDirection="rtl"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_fact_check_24"
+                    app:tint="@color/GOLDENROD"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/txtmodel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:text="مدل مبل"
+                android:textColor="@color/GRAY_TEXT"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtWoodColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:text="رنگ چوب"
+                android:textColor="@color/GRAY_TEXT"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8sp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtCloth1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:fontFamily="@font/byekan"-->
+<!--                android:text="پارچه تک نفره"-->
+<!--                android:textColor="@color/GRAY_TEXT"-->
+<!--                android:textSize="14sp" />-->
+
+            <TextView
+                android:id="@+id/txtNumberOfSeats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:fontFamily="@font/byekan"
+                android:text="تعداد نشیمن"
+                android:textColor="@color/GRAY_TEXT"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginEnd="8sp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="5">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtCloth3"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:fontFamily="@font/byekan"-->
+<!--                android:text="پارچه دو نفره"-->
+<!--                android:textColor="@color/GRAY_TEXT"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtCloth2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:fontFamily="@font/byekan"-->
+<!--                android:text="پارچه سه نفره"-->
+<!--                android:textColor="@color/GRAY_TEXT"-->
+<!--                android:textSize="14sp" />-->
+
+<!--        </LinearLayout>-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/GOLDENROD"
+            android:backgroundTint="@color/GOLDENROD"
+            android:foreground="@color/GOLDENROD"
+            android:foregroundTint="@color/GOLDENROD"
+            android:foregroundTintMode="src_atop" />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/byekan"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="توضیحات"
+            android:textColor="@color/GRAY_TEXT" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <CheckBox
+                android:id="@+id/checkBoxAmadetahvil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekan"
+                android:gravity="center"
+                android:text="آماده  تحویل"
+                android:textColor="@color/GOLDENROD"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDarhaleejra"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekan"
+                android:gravity="center"
+                android:text="درحال اجرا"
+                android:textColor="@color/GOLDENROD"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDaryaftShod"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/byekan"
+                android:gravity="center"
+                android:text="دریافت شد"
+                android:textColor="@color/GOLDENROD"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
