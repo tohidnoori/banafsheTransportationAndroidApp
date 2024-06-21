@@ -50,7 +50,7 @@ class addStuffsAdapter(context: Context?) :
         fun bindData(position: Int) {
             add.setOnClickListener{
                 if(position>=data.size){
-                    data.add(Stuffs(name.text.toString(),num.text.toString().toInt(),desc.text.toString()))
+                    data.add(Stuffs(name.text.toString(),num.text.toString(),desc.text.toString()))
                     add.setImageResource(R.drawable.ic_baseline_check_24)
                     notifyItemInserted(position+1)
                 }

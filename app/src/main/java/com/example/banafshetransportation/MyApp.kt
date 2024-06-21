@@ -15,32 +15,32 @@ import com.example.banafshetransportation.goodPerfs.GoodPrefs
 const val NOTIFICATION_ID = "Banafsheh"
 class MyApp :Application(){
     companion object{
-        @SuppressLint("RemoteViewLayout")
-        fun notifBuilder(Nid:Int,NotifTitle:String,NotifText:String,context:Context):Notification {
-            val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            val intent2 = context.packageManager.getLaunchIntentForPackage(context.packageName)
-            val pendingIntent = PendingIntent.getActivity(
-                context, 12,
-                intent2,
-                PendingIntent.FLAG_IMMUTABLE
-            )
-
-            val notification = NotificationCompat.Builder(context, NOTIFICATION_ID)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(
-                    context.resources,
-                    R.drawable.chair
-                )
-                )
-                .setSmallIcon(R.drawable.chair)
-                .setContentTitle(NotifTitle)
-                .setContentText(NotifText)
-                .setContentIntent(pendingIntent)
-                .build()
-            notificationManager.notify(Nid, notification)
-
-            return notification
-        }
+//        @SuppressLint("RemoteViewLayout")
+//        fun notifBuilder(Nid:Int,NotifTitle:String,NotifText:String,context:Context):Notification {
+//            val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            val intent2 = context.packageManager.getLaunchIntentForPackage(context.packageName)
+//            val pendingIntent = PendingIntent.getActivity(
+//                context, 12,
+//                intent2,
+//                PendingIntent.FLAG_IMMUTABLE
+//            )
+//
+//            val notification = NotificationCompat.Builder(context, NOTIFICATION_ID)
+//                .setLargeIcon(
+//                    BitmapFactory.decodeResource(
+//                    context.resources,
+//                    R.drawable.chair
+//                )
+//                )
+//                .setSmallIcon(R.drawable.chair)
+//                .setContentTitle(NotifTitle)
+//                .setContentText(NotifText)
+//                .setContentIntent(pendingIntent)
+//                .build()
+//            notificationManager.notify(Nid, notification)
+//
+//            return notification
+//        }
     }
     override fun onCreate() {
         super.onCreate()

@@ -13,4 +13,12 @@ interface MyApi {
         @Query("phone") phone: String,
         @Query("job") job: Int,
     ): Response<MyResponse<ArrayList<Resids>>>
+
+    @Multipart
+    @POST("uploadFile.php")
+    suspend fun uploadFile(
+        @Query("content-type") contentType: String,
+        @Part file: MultipartBody.Part
+    ): Response<MyResponse<String>>
+
 }

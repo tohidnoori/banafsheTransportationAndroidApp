@@ -44,15 +44,15 @@ public class Socket {
                     jsonObject = (JSONObject) args[0];
                     try {
                         System.out.println(jsonObject.toString());
-                        if (jsonObject.has("model")) {
-                            MyApp.Companion.notifBuilder(90,"یک فاکتور با شماره " + jsonObject.getString("id") + " ثبت شد.",
-                                    jsonObject.getString("model") + " " + jsonObject.getString("numberOfSeats") + " نفره", context);
-                        }
-                        else {
-                            MyApp.Companion.notifBuilder(85,"یک رسید با شماره " + jsonObject.getString("id") + " ثبت شد.",
-                                    jsonObject.getString("custumerName") + " در تاریخ " + jsonObject.getString("date") , context);
-
-                        }
+                        //  if (jsonObject.has("model")) {
+                        //      MyApp.Companion.notifBuilder(90,"یک فاکتور با شماره " + jsonObject.getString("id") + " ثبت شد.",
+                        //              jsonObject.getString("model") + " " + jsonObject.getString("numberOfSeats") + " نفره", context);
+                        //  }
+                        //  else {
+                        //      MyApp.Companion.notifBuilder(85,"یک رسید با شماره " + jsonObject.getString("id") + " ثبت شد.",
+                        //              jsonObject.getString("custumerName") + " در تاریخ " + jsonObject.getString("date") , context);
+                        //
+                        //  }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

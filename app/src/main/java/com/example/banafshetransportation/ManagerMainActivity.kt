@@ -1,13 +1,19 @@
 package com.example.banafshetransportation
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -15,8 +21,12 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,16 +45,25 @@ import com.example.banafshetransportation.DataClasses.Resids
 import com.example.banafshetransportation.databinding.ActivityManagerMainBinding
 import com.example.banafshetransportation.goodPerfs.GoodPrefs
 import com.example.banafshetransportation.retrofit.RetrofitInstance
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 import java.net.URLDecoder
+import java.util.Date
 
 
 class ManagerMainActivity : AppCompatActivity() {
     lateinit var progressDialog: SweetAlertDialog
+    var currentCaptureImagePath = "";
+    lateinit var imageProcessor: MyImageProcessor
+    var uploadImageIndex = 0;
     fun progress(context: Context?) {
         progressDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
         progressDialog.titleText = "لطفا صبر کنید."
@@ -87,20 +106,21 @@ class ManagerMainActivity : AppCompatActivity() {
     var CoworkersArrayList = ArrayList<CoWorkersIDs>()
     var FactorArrayList = ArrayList<Factors>()
     var ResidArrayList = ArrayList<Resids>()
-    val socket = Socket(this)
+    //val socket = Socket(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        imageProcessor = MyImageProcessor.instance
         binding = ActivityManagerMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        socket.mSocket.connect()
+        //socket.mSocket.connect()
         GoodPrefs.init(applicationContext)
         job = GoodPrefs.getInstance().getInt("job",50)
         binding.drawerName.text = GoodPrefs.getInstance().getString("name","")
 //        binding.drawerName.text = "محمد علی رضایی"
         binding.drawer.openDrawer(binding.customDrawer)
         if (job != 4) {
-            socket.mSocket.on("factor", socket.handlerMSG)
+            //socket.mSocket.on("factor", socket.handlerMSG)
         }
         binding.imgClose.setOnClickListener{
             finish()
@@ -113,11 +133,11 @@ class ManagerMainActivity : AppCompatActivity() {
                 binding.drawer.openDrawer(binding.customDrawer)
             }
         }
-        socket.mSocket.on("resid", socket.handlerMSG)
+        //socket.mSocket.on("resid", socket.handlerMSG)
 
-        val intent2 = Intent(this, MyService::class.java)
-        intent2.putExtra("job", job)
-        startService(intent2)
+//        val intent2 = Intent(this, MyService::class.java)
+//        intent2.putExtra("job", job)
+//        startService(intent2)
 
         if (job == 4) {
             binding.btnManageFactors.visibility = View.GONE
@@ -486,7 +506,7 @@ class ManagerMainActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             progressDialog.dismiss()
                             val body = response.body()!!
-                            Log.i("salam", "login: ${body.message.toString()}")
+                            Log.i("salam", "login: ${body.data.toString()}")
                             if (body.status == 0) {
                                 Toast.makeText(
                                     applicationContext,
@@ -535,7 +555,12 @@ class ManagerMainActivity : AppCompatActivity() {
             binding.emptyText.text = ""
         }
         ResidArrayList.reverse()
-        residAdapter = ResidsAdapter(this, ResidArrayList)
+        residAdapter = ResidsAdapter(this, ResidArrayList, listener = object : AdapterClick {
+            override fun uploadPhoto(position: Int) {
+                uploadImageIndex = position;
+                permission()
+            }
+        })
         binding.recycler.adapter = residAdapter
         binding.recycler.layoutManager =LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recycler.scrollToPosition(0)
@@ -566,6 +591,188 @@ class ManagerMainActivity : AppCompatActivity() {
                 override fun onSent(result: Boolean) {
                 }
             })
+    }
+    private fun uploadFile( path: String) {
+        binding.imageLoading.visibility =  View.VISIBLE
+        if (isNetworkAvailable(this@ManagerMainActivity)){
+            lifecycleScope.launchWhenCreated {
+                try{
+                    val file = File(path)
+                    var requestFile = RequestBody.create("image/*".toMediaType(), file)
+                    val filePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                    val response = RetrofitInstance.api.uploadFile(
+                        "application/json",
+                        filePart
+                    )
+
+                    withContext(Dispatchers.Main) {
+                        binding.imageLoading.visibility =  View.INVISIBLE
+                        if (response.isSuccessful) {
+                            val body = response.body()!!
+                            Log.i("kos", "login: ${body.message.toString()}")
+                            if (body.status == 0) {
+                                setSnackBar(binding.root,{},body.message)
+                            } else {
+                                setSnackBar(binding.root,{},"تصویر اپلود شد")
+                                ResidArrayList[uploadImageIndex].residImage=body.data!!
+                                residAdapter.notifyDataSetChanged()
+                            }
+
+                        } else {
+                            setSnackBar(binding.root,{},"Profile picture could not be uploaded")
+                            Log.i("kos", response.message())
+                        }
+                    }
+                }catch (e:Exception){
+                    binding.imageLoading.visibility =  View.INVISIBLE
+                    setSnackBar(binding.root,{},"Profile picture could not be uploaded")
+                    Log.i("kos", e.message.toString())
+                }
+            }
+        }else{
+            binding.imageLoading.visibility =  View.INVISIBLE
+            setSnackBar(binding.root,{uploadFile(path)},"اینترنت متصل نیست")
+        }
+    }
+    fun permission() {
+        var permissions = if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.CAMERA
+            )
+        }else{
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
+        }
+        var granted = true
+        for ( per in permissions){
+            granted = ContextCompat.checkSelfPermission(
+                applicationContext,
+                per
+            ) != PackageManager.PERMISSION_GRANTED
+        }
+        if (granted) {
+            var shouldShowRequestPermissionRationale= true;
+            for ( per in permissions){
+                shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(
+                    this@ManagerMainActivity,
+                    per
+                )
+            }
+            if (!shouldShowRequestPermissionRationale) {
+                ActivityCompat.requestPermissions(
+                    this@ManagerMainActivity,
+                    permissions,
+                    101
+                )
+            }
+        } else {
+            Log.e("Else", "Else")
+            showFileChooser(type="image/*")
+        }
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 101) {
+            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                showFileChooser(type = "image/*")
+            } else {
+                Log.e("Permission", "Permission denied")
+                // Handle the case where permission is denied
+            }
+        }
+    }
+    fun captureImageFile(): File {
+        // Store image in dcim
+        val file = File(
+            Environment.getExternalStorageDirectory().toString() + "/DCIM/",
+            "image" + Date().getTime() + ".png"
+        )
+        currentCaptureImagePath=file.absolutePath
+        return file
+    }
+    private fun showFileChooser(type:String) {
+        val intentGallery = Intent(Intent.ACTION_PICK)
+        intentGallery.type = "image/*"
+
+        val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(captureImageFile()))
+
+        val galleryIntent = Intent.createChooser(intentGallery, "Choose Image")
+        galleryIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(intentCamera))
+
+        startActivityForResult(galleryIntent, 1)
+    }
+    @Deprecated("Deprecated in Java")
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        //binding.loadingAudio.visibility = View.VISIBLE;
+        Log.i("kos","$resultCode $requestCode")
+        if (resultCode == RESULT_OK ) {
+            try {
+                var which = "";
+                val filePath=
+                    if( data!=null&&data.data!=null){
+                        which="gallery";
+                        imageProcessor.getFilePathFromUri(applicationContext,data.data!!)
+                    }else{
+                        which="camera"
+                        currentCaptureImagePath
+                    }
+                if (filePath!=null) {
+                    if(File(filePath).length()/1024>1024){
+                        //file is more than 1 mb
+                        var a = imageProcessor.resizeImage(applicationContext, File(filePath));
+                        Log.i("kos","file size : ${File(filePath).length()/1024}")
+                        Log.i("kos","resized size : ${a.length()/1024}")
+                        if(a.length()/1024>1024){
+                            setSnackBar(binding.root,{},"This image is too big choose another.")
+                            return;
+                        }
+                        uploadFile(a.absolutePath)
+                    }else{
+                        uploadFile(filePath)
+                    }
+                    if(which=="camera"){
+                        setSnackBar(binding.root,{},"The file was received from Camera.")
+                    }else{
+                        setSnackBar(binding.root,{},"The file was received from gallery.")
+                    }
+                } else {
+                    setSnackBar(binding.root,{},"Error loading file")
+                }
+
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+    fun setSnackBar(coordinatorLayout: View?,retryFunc:()->Unit,message: String) {
+        val snackbar = Snackbar
+            .make(
+                coordinatorLayout!!,
+                message,
+                Snackbar.LENGTH_INDEFINITE
+            ).setDuration(2500)
+        if(message=="اینترنت متصل نیست")
+        {
+            snackbar.setAction("دوباره") {
+                snackbar.dismiss()
+                retryFunc()
+            }
+            snackbar.setDuration(5000)
+        }
+        snackbar.setActionTextColor(Color.RED)
+        val sbView = snackbar.view
+        val textView =sbView.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        snackbar.show()
     }
 
 

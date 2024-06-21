@@ -6,6 +6,7 @@ data class Resids(
     val id: Int,
     val address: String,
     val phoneNumber: String,
+    var residImage: String?=null,
     val price: Int,
     var listOfStufs: String,
     val randomGenerator: String,

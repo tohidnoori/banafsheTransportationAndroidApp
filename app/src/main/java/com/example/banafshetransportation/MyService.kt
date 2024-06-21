@@ -26,7 +26,7 @@ class MyService : Service() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         //Toast.makeText(this,"EJRA SHOD!",Toast.LENGTH_LONG).show()
-        startForeground(67,MyApp.notifBuilder(67,"گالری مبل بنفشه","",this))
+        //startForeground(67,MyApp.notifBuilder(67,"گالری مبل بنفشه","",this))
         val job= intent?.getIntExtra("job",50)
         socket=Socket(this)
         socket.mSocket.connect()

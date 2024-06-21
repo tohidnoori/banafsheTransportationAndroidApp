@@ -15,6 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/action_bar"
@@ -76,6 +77,13 @@
                 android:textSize="14sp"
                 android:textAlignment="center"
                 android:layout_centerInParent="true"/>
+            <ProgressBar
+                android:id="@+id/imageLoading"
+                android:layout_width="40dp"
+                android:visibility="gone"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                />
         </RelativeLayout>
 
     </FrameLayout>
